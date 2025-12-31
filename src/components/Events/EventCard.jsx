@@ -6,13 +6,15 @@ const EventCard = ({event, small = false}) => {
 
     //Format date
     const eventDate = new Date(event.date)
-    const dateStr = eventDate.toLocaleDateString('fr-Fr', {day: 'numeric', month:'short'});
-    const yearStr = event.getFullYear()
-    const timeStr = event.toLocaleDateString('fr-Fr', {hour: '2-digit', minute:'2-digit'})
+    const timeStr = eventDate.toLocaleTimeString('fr-FR', {
+        hour: '2-digit', 
+        minute: '2-digit'
+    })
+    
   return (
     <Link
         to={`/events/${event._id}`}
-        className='group block bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-cool h-full border-transparent hover:border-emerald-100'
+        className='group block bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full border-transparent hover:border-emerald-100'
     >
     {/*Image Container*/}
     <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
@@ -24,7 +26,7 @@ const EventCard = ({event, small = false}) => {
         />
 
         {/*Price Badge*/}
-        <div className="absolute bottom-3 bg-white/95 backdrop:blur-md px-3 py-1.5 rounded-lg shadow-sm flex items-baseline gap-1">
+        <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm flex items-baseline gap-1">
             {(!event.price || event.price === 0) ? (
                 <span className='text-emerald-600 font-bold text-sm'>Gratuit</span>
             ): (
@@ -42,6 +44,7 @@ const EventCard = ({event, small = false}) => {
             </div> 
         )}
     </div>
+    
     <div className='p-5 flex flex-col flex-1'>
         <div className="flex gap-4 mb-3">
             {/*Date Box*/}
@@ -51,7 +54,7 @@ const EventCard = ({event, small = false}) => {
             </div>
 
             {/*Titre*/}
-            <div>
+            <div className='flex-1'>
                 <h3 className='font-bold text-gray-900 text-lg leading-tight group-hover:text-emerald-600 transition-colors line-clamp-2'>
                     {event.title}
                 </h3>
@@ -67,22 +70,21 @@ const EventCard = ({event, small = false}) => {
                 )}
             </div>
         </div>
-    </div>
 
-    {/* Description (Optional) */}
-    {!small && event.description && (
-        <p className='text-gray-600 text-sm mb-4 line-clamp-2 flex-1 pl-[4rem]'>
-            {event.description}
-        </p>
-    )}
+        {/* Description (Optional) */}
+        {!small && event.description && (
+            <p className='text-gray-600 text-sm mb-4 line-clamp-2'>
+                {event.description}
+            </p>
+        )}
 
-    {/*Footer*/}
-
-    <div className='mt-auto pt-4 border-t border-gray-50 flex items-center justify-between pl-[4rem]'>
-        <div className='flex items-center gap-2'>
-            {/*Avatar placeholder*/}
-            <div className='w-6 h-6 rounded-full bg-gray-200'></div>
-            <span className='text-xs text-gray-500 font-medium'>EventX</span>
+        {/*Footer*/}
+        <div className='mt-auto pt-4 border-t border-gray-50 flex items-center justify-between'>
+            <div className='flex items-center gap-2'>
+                {/*Avatar placeholder*/}
+                <div className='w-6 h-6 rounded-full bg-gray-200'></div>
+                <span className='text-xs text-gray-500 font-medium'>EventX</span>
+            </div>
         </div>
     </div>
     </Link>

@@ -5,7 +5,7 @@ import { useQuery } from 'convex/react';
 import EventCard from './EventCard';
 
 const EventsGrid = () => {
-    const events = useQuery(api.getEvents);
+    const events = useQuery(api.events.getEvents);
 
     if(!events){
         return(

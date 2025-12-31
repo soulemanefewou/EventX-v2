@@ -15,7 +15,7 @@ const EventDetailpage = () => {
     const event = events?.find(e => e._id === id)
 
     const bookEvent = useMutation(api.bookings.bookEvent)
-    const isbooked = useQuery(api.bookings.checkBooking, {eventId:id, clerkId: user?.id})
+    const isBooked = useQuery(api.bookings.checkBooking, {eventId:id, clerkId: user?.id})
 
     const [bookingLoading, setBookingLoading] = useState(false)
 
@@ -48,7 +48,7 @@ const EventDetailpage = () => {
         }
 
         //Si l'utilisateur est déjà inscrit, ne rien faire
-        if(isbooked){
+        if(isBooked){
             return
         }
 
